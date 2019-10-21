@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <!--указываем папку куда сохраняем, попка прямо в проекте видно ее слева-->
+        <Property name="APP_LOG_ROOT">./loggers/</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <RollingFile name="com.example.demo.controller.ControllerEmployee"
+                           fileName="${APP_LOG_ROOT}/ControllerEmployee.log"
+                           filePattern="${APP_LOG_ROOT}/SpringBoot2App/application-%d{yyyy-MM-dd}-%i.log">
+        <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1" />
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.example.demo.controller.ControllerEmployee" additivity="false" level="Error">
+            <AppenderRef ref="com.example.demo.controller.ControllerEmployee" />
+            <AppenderRef ref="console"/>
+        </Logger>
+
+
+
+
+
+
+
+
+
+
+        <!--выбираем вариант Уровень вывода:Warn,Debug,Error, Info  и т.д-->
+        <Root level="warn"> //>
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="appLog" />
+        </Root>
+    </Loggers>
+
+</Configuration>
